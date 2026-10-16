@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090d18">
+  <meta name="description" content="BrawlahallaFIX — верните мой 2022. Удобный интерфейс, низкий пинг и прямое подключение без сторонних серверов.">
+  <title>BrawlahallaFIX — Верните мой 2022</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #080b15;
+      --panel: rgba(17, 24, 39, .78);
+      --panel-strong: #111827;
+      --text: #f4f6ff;
+      --muted: #98a2bd;
+      --purple: #7865ff;
+      --purple-hot: #a99dff;
+      --mint: #48f0b2;
+      --line: rgba(143, 132, 255, .2);
+      --shadow: 0 0 48px rgba(104, 82, 255, .18);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; background: var(--bg); color: var(--text);
+      font-family: Inter, "Segoe UI", system-ui, -apple-system, sans-serif;
+      line-height: 1.6; overflow-x: hidden;
+    }
+    body::before {
+      content: ""; position: fixed; inset: 0; pointer-events: none; z-index: -2;
+      background:
+        radial-gradient(ellipse at 15% 8%, rgba(102, 81, 255, .18), transparent 34%),
+        radial-gradient(ellipse at 90% 36%, rgba(44, 235, 176, .08), transparent 27%),
+        linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
+      background-size: auto, auto, 42px 42px, 42px 42px;
+      mask-image: linear-gradient(to bottom, black, transparent 85%);
+    }
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
+    .nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 22px 0; gap: 20px;
+    }
+    .brand { display: flex; align-items: center; gap: 11px; font-weight: 800; letter-spacing: -.03em; }
+    .brand-mark {
+      width: 38px; height: 38px; display: grid; place-items: center; border-radius: 12px;
+      background: linear-gradient(135deg, #30266c, #171b35);
+      border: 1px solid rgba(169,157,255,.65); color: #e6e1ff;
+      box-shadow: 0 0 25px rgba(120,101,255,.24); font-size: 14px;
+    }
+    .nav-links { display: flex; align-items: center; gap: 27px; color: var(--muted); font-size: 14px; }
+    .nav-links a:hover { color: white; }
+    .button {
+      display: inline-flex; justify-content: center; align-items: center; gap: 10px;
+      border: 1px solid transparent; border-radius: 13px; padding: 13px 20px;
+      font-weight: 750; font-size: 14px; cursor: pointer; transition: .2s ease;
+    }
+    .button-primary {
+      color: #fff; background: linear-gradient(115deg, #6754ed, #8b72ff);
+      box-shadow: 0 8px 30px rgba(103,84,237,.28);
+    }
+    .button-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 36px rgba(103,84,237,.4); }
+    .button-ghost { border-color: var(--line); background: rgba(255,255,255,.025); color: #e5e7ff; }
+    .button-ghost:hover { border-color: rgba(169,157,255,.65); background: rgba(120,101,255,.08); }
+    .hero { display: grid; grid-template-columns: 1.05fr .95fr; gap: 42px; align-items: center; padding: 62px 0 58px; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 9px; padding: 7px 12px;
+      border: 1px solid rgba(72,240,178,.22); border-radius: 999px;
+      color: var(--mint); background: rgba(72,240,178,.055); font-size: 12px;
+      font-weight: 800; letter-spacing: .11em; text-transform: uppercase;
+    }
+    .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--mint); box-shadow: 0 0 12px var(--mint); }
+    h1 { font-size: clamp(46px, 6.5vw, 78px); line-height: .99; letter-spacing: -.065em; margin: 24px 0 23px; }
+    .gradient-text { background: linear-gradient(100deg, #fff 12%, #b9b0ff 54%, #65f5c1 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .hero p { max-width: 550px; color: var(--muted); font-size: 18px; margin: 0 0 28px; }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .fineprint { font-size: 12px !important; margin-top: 17px !important; color: #737f9c !important; }
+    .visual { min-height: 410px; position: relative; display: grid; place-items: center; }
+    .orb {
+      width: min(330px, 75vw); aspect-ratio: 1; border-radius: 50%; position: absolute;
+      background: radial-gradient(circle at 38% 35%, rgba(120,101,255,.25), rgba(120,101,255,.04) 44%, transparent 68%);
+      border: 1px solid rgba(169,157,255,.14); box-shadow: 0 0 90px rgba(103,84,237,.16), inset 0 0 50px rgba(103,84,237,.09);
+    }
+    .orb::before, .orb::after { content: ""; position: absolute; inset: 18px; border-radius: 50%; border: 1px solid rgba(120,101,255,.18); transform: rotate(-24deg) scaleX(1.22); }
+    .orb::after { inset: 42px; transform: rotate(35deg) scaleX(1.35); border-color: rgba(72,240,178,.19); }
+    .app-card {
+      width: min(340px, 88%); position: relative; z-index: 1; padding: 19px;
+      border: 1px solid rgba(169,157,255,.27); border-radius: 24px;
+      background: linear-gradient(145deg, rgba(22,29,49,.95), rgba(12,16,31,.94));
+      box-shadow: 0 25px 90px rgba(0,0,0,.38), 0 0 55px rgba(103,84,237,.14);
+      transform: rotate(2deg);
+    }
+    .app-top { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,.07); padding-bottom: 15px; }
+    .app-title { font-size: 13px; font-weight: 800; }
+    .version { color: var(--muted); font-size: 10px; }
+    .app-core { text-align: center; padding: 25px 0 20px; }
+    .core-logo {
+      width: 100px; height: 100px; margin: 0 auto 13px; border-radius: 50%;
+      display: grid; place-items: center; font-size: 26px; font-weight: 900; letter-spacing: -.06em;
+      color: #d9d3ff; background: radial-gradient(circle, #28204e, #15152b 70%);
+      border: 2px solid #6e5cf1; box-shadow: 0 0 0 8px rgba(103,84,237,.08), 0 0 35px rgba(103,84,237,.25);
+    }
+    .status { color: var(--mint); font-size: 10px; letter-spacing: .13em; font-weight: 800; }
+    .timer { font: 700 24px Consolas, monospace; margin-top: 5px; }
+    .app-button { text-align: center; background: linear-gradient(100deg, #6754ed, #8b72ff); border-radius: 10px; padding: 11px; font-size: 11px; font-weight: 900; }
+    .mini-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+    .metric { border: 1px solid rgba(255,255,255,.07); background: rgba(255,255,255,.025); padding: 10px; border-radius: 10px; }
+    .metric strong { display: block; font-size: 13px; }
+    .metric span { font-size: 10px; color: var(--muted); }
+    .float-tag { position: absolute; z-index: 2; border: 1px solid var(--line); border-radius: 12px; padding: 11px 14px; background: rgba(14,20,38,.88); box-shadow: var(--shadow); font-size: 12px; }
+    .float-tag b { color: var(--mint); }
+    .tag-one { top: 34px; right: 8px; }
+    .tag-two { bottom: 30px; left: 8px; }
+    section { padding: 48px 0; }
+    .section-head { max-width: 640px; margin-bottom: 26px; }
+    .kicker { color: var(--mint); font-size: 12px; letter-spacing: .16em; text-transform: uppercase; font-weight: 850; }
+    h2 { font-size: clamp(30px, 4vw, 46px); line-height: 1.08; letter-spacing: -.045em; margin: 12px 0; }
+    .section-head p { color: var(--muted); margin: 0; }
+    .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .feature {
+      padding: 25px; min-height: 215px; border: 1px solid var(--line); border-radius: 20px;
+      background: linear-gradient(145deg, rgba(20,27,45,.83), rgba(13,18,32,.76));
+      transition: transform .2s ease, border-color .2s ease;
+    }
+    .feature:hover { transform: translateY(-4px); border-color: rgba(169,157,255,.55); }
+    .feature-icon { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 13px; margin-bottom: 17px; background: rgba(120,101,255,.13); color: var(--purple-hot); font-size: 21px; }
+    .feature:nth-child(2) .feature-icon { background: rgba(72,240,178,.09); color: var(--mint); }
+    .feature h3 { font-size: 18px; margin: 0 0 9px; letter-spacing: -.02em; }
+    .feature p { color: var(--muted); font-size: 14px; margin: 0; }
+    .callout {
+      padding: 30px; border-radius: 25px; border: 1px solid rgba(120,101,255,.28);
+      background: radial-gradient(ellipse at 100% 0%, rgba(72,240,178,.08), transparent 45%), linear-gradient(120deg, rgba(103,84,237,.13), rgba(17,24,39,.8));
+      display: flex; justify-content: space-between; align-items: center; gap: 24px;
+    }
+    .callout h2 { margin-top: 0; }
+    .callout p { margin-bottom: 0; color: var(--muted); max-width: 570px; }
+    .download-note { color: #7d88a4; font-size: 12px; margin-top: 14px; }
+    footer { padding: 28px 0 36px; border-top: 1px solid rgba(255,255,255,.06); color: #77819b; font-size: 12px; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    @media (max-width: 800px) {
+      .hero { grid-template-columns: 1fr; padding: 44px 0 36px; gap: 8px; }
+      .visual { min-height: 350px; }
+      .tag-one { top: 12px; right: 0; }
+      .tag-two { bottom: 10px; left: 0; }
+      .features { grid-template-columns: 1fr; }
+      .feature { min-height: auto; }
+      .callout { align-items: flex-start; flex-direction: column; padding: 27px; }
+      .nav-links { gap: 13px; }
+      .nav-links a:not(.button) { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; } }
+  </style>
+</head>
+<body>
+  <header class="wrap nav">
+    <a class="brand" href="#" aria-label="BrawlahallaFIX — главная">
+      <span class="brand-mark">BF</span><span>BrawlahallaFIX</span>
+    </a>
+    <nav class="nav-links" aria-label="Основная навигация">
+      <a href="#features">Преимущества</a>
+      <a href="#about">О проекте</a>
+      <a class="button button-ghost" href="#download">Получить ↗</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="wrap hero">
+      <div>
+        <div class="eyebrow"><span class="dot"></span> Возвращаем привычный гейминг</div>
+        <h1><span class="gradient-text">Верните мой 2022.</span></h1>
+        <p>BrawlahallaFIX — простой инструмент для тех, кто хочет снова наслаждаться игрой и привычными сервисами без лишней сложности.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#download">Получить BrawlahallaFIX <span aria-hidden="true">↗</span></a>
+          <a class="button button-ghost" href="#features">Узнать больше ↓</a>
+        </div>
+        <p class="fineprint">Без аккаунтов и сторонних VPN-серверов. Настройка — в пару кликов.</p>
+      </div>
+
+      <div class="visual" aria-label="Декоративная иллюстрация интерфейса BrawlahallaFIX">
+        <div class="orb"></div>
+        <div class="float-tag tag-one">Прямое соединение <b>●</b></div>
+        <div class="float-tag tag-two">Минимализм. <b>Максимум контроля.</b></div>
+        <div class="app-card">
+          <div class="app-top"><span class="app-title">BrawlahallaFIX</span><span class="version">v1.0 · CONTROL</span></div>
+          <div class="app-core">
+            <div class="core-logo">BF</div>
+            <div class="status">● READY TO CONNECT</div>
+            <div class="timer">00:00:00</div>
+          </div>
+          <div class="app-button">ВКЛЮЧИТЬ</div>
+          <div class="mini-metrics">
+            <div class="metric"><strong>Low latency</strong><span>Без лишнего маршрута</span></div>
+            <div class="metric"><strong>One click</strong><span>Понятное управление</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section id="features">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="kicker">Почему BrawlahallaFIX</div>
+          <h2>Меньше лишнего.<br><span class="gradient-text">Больше игры.</span></h2>
+          <p>Только нужные функции, понятное управление и никаких сложных панелей.</p>
+        </div>
+        <div class="features">
+          <article class="feature">
+            <div class="feature-icon" aria-hidden="true">↯</div>
+            <h3>Низкий пинг — без лишних узлов</h3>
+            <p>Подключение идёт напрямую, без маршрутизации через сторонние VPN-серверы. Реальный пинг зависит от провайдера и сети.</p>
+          </article>
+          <article class="feature">
+            <div class="feature-icon" aria-hidden="true">⌁</div>
+            <h3>Прямое подключение</h3>
+            <p>Не нужно создавать аккаунт или выбирать удалённый сервер. Приложение работает на твоём ПК.</p>
+          </article>
+          <article class="feature">
+            <div class="feature-icon" aria-hidden="true">✦</div>
+            <h3>Удобный интерфейс</h3>
+            <p>Запуск и остановка в один клик, визуальный индикатор состояния, таймер подключения и системный трей.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="wrap">
+        <div class="callout">
+          <div>
+            <div class="kicker">Твой контроль — твои правила</div>
+            <h2>Верните мой 2022.</h2>
+            <p>BrawlahallaFIX создан, чтобы сделать запуск и управление инструментами обхода сетевых ограничений проще. Никаких обещаний магического ускорения: результат зависит от твоего соединения и настроек.</p>
+          </div>
+          <a class="button button-primary" href="#download">Попробовать ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="download">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="kicker">Начни за минуту</div>
+          <h2>Готов вернуть привычный опыт?</h2>
+          <p>Скачай последнюю сборку BrawlahallaFIX со страницы релизов проекта на GitHub.</p>
+        </div>
+        <!-- Перед публикацией замени USERNAME/REPOSITORY на адрес своего GitHub-репозитория. -->
+        <a class="button button-primary" href="https://github.com/USERNAME/REPOSITORY/releases/latest" target="_blank" rel="noopener noreferrer">Получить BrawlahallaFIX <span aria-hidden="true">↗</span></a>
+        <div class="download-note">Ссылка на скачивание: GitHub Releases. Перед публикацией замени адрес на свой репозиторий.</div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <span>© <span id="year">2026</span> BrawlahallaFIX</span>
+      <span>Верните мой 2022. · Неофициальный проект</span>
+    </div>
+  </footer>
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>
