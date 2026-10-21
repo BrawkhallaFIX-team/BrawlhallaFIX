@@ -1,116 +1,1379 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#08091a">
-<title>BrawlhallaFIX — Верните мой 2022</title>
-<meta name="description" content="BrawlhallaFIX — удобный инструмент для настройки подключения к Brawlhalla. Верните мой 2022.">
-<style>
-:root{--bg:#070817;--panel:rgba(14,17,43,.76);--line:rgba(133,111,255,.27);--text:#f6f5ff;--muted:#aaaed0;--violet:#8b35ff;--blue:#37b9ff;--mint:#5dffd0}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;overflow-x:hidden}
-body:before{content:"";position:fixed;inset:0;z-index:-3;background:radial-gradient(ellipse at 78% 22%,rgba(83,36,197,.35),transparent 35%),radial-gradient(ellipse at 12% 45%,rgba(21,90,218,.22),transparent 33%),linear-gradient(145deg,#070817 0%,#0a0b22 54%,#100720 100%)}
-body:after{content:"";position:fixed;inset:0;pointer-events:none;z-index:5;opacity:.12;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.2'/%3E%3C/svg%3E")}
-a{color:inherit;text-decoration:none}button{font:inherit;cursor:pointer}.wrap{width:min(1160px,calc(100% - 44px));margin:auto}.nav{height:78px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(155,139,255,.15);position:sticky;top:0;z-index:20;background:rgba(7,8,23,.76);backdrop-filter:blur(18px)}.brand{display:flex;align-items:center;gap:12px;font-weight:850;letter-spacing:-.04em;font-size:21px}.logo{display:grid;place-items:center;width:42px;height:42px;border-radius:13px;background:linear-gradient(135deg,#9d3dff,#2679ff);box-shadow:0 0 28px #772dff70;font-weight:1000;font-style:italic;font-size:21px}.brand span span{color:#6dbbff}.links{display:flex;gap:32px;color:#c5c6e0;font-size:14px}.links a{transition:color .2s}.links a:hover{color:#fff}.nav-actions{display:flex;align-items:center;gap:12px}.outline,.primary,.ghost{border:1px solid var(--line);border-radius:999px;padding:12px 19px;color:#fff;background:rgba(22,20,55,.5);transition:transform .2s,box-shadow .2s,border-color .2s}.outline:hover,.ghost:hover{border-color:#a66bff;box-shadow:0 0 24px #793cff30;transform:translateY(-2px)}.primary{border:0;background:linear-gradient(100deg,#7d2cff,#3d7cff 80%,#3ccaff);font-weight:750;box-shadow:0 8px 30px #6127ed40}.primary:hover{transform:translateY(-3px);box-shadow:0 12px 34px #6127ed75}.menu{display:none;background:none;color:white;border:0;font-size:25px}
-.hero{position:relative;min-height:650px;display:grid;grid-template-columns:1.02fr .98fr;align-items:center;gap:30px;padding:65px 0 52px}.eyebrow{display:inline-flex;align-items:center;gap:10px;color:#b68cff;font-size:11px;font-weight:850;letter-spacing:.19em;text-transform:uppercase}.dot{width:7px;height:7px;border-radius:50%;background:var(--mint);box-shadow:0 0 12px var(--mint);animation:pulse 1.7s infinite}.hero h1{font-size:clamp(54px,7vw,88px);line-height:.96;letter-spacing:-.075em;margin:24px 0 22px;font-weight:950}.gradient{display:block;background:linear-gradient(100deg,#a53dff 5%,#587bff 50%,#4be5ff 90%);color:transparent;background-clip:text;-webkit-background-clip:text;text-shadow:0 0 45px #6e36ff24}.hero p{max-width:500px;color:#b9bddc;line-height:1.7;font-size:16px}.cta-row{display:flex;gap:13px;flex-wrap:wrap;margin-top:30px}.cta-row button{padding:15px 22px}.micro{display:flex;gap:20px;flex-wrap:wrap;color:#858aaf;font-size:12px;margin-top:25px}.micro span{display:flex;align-items:center;gap:7px}.check{color:var(--mint)}
-.visual{position:relative;min-height:440px;display:grid;place-items:center;perspective:1000px}.orb{position:absolute;width:350px;height:350px;border-radius:50%;background:radial-gradient(circle,rgba(87,56,255,.27),rgba(27,117,255,.07) 48%,transparent 70%);filter:blur(4px);animation:orb 7s ease-in-out infinite}.ring{position:absolute;width:350px;height:350px;border:1px solid rgba(91,104,255,.3);border-radius:50%;animation:spin 24s linear infinite}.ring:before,.ring:after{content:"";position:absolute;width:9px;height:9px;border-radius:50%;background:#65caff;box-shadow:0 0 20px #65caff;top:38px;left:52px}.ring:after{top:auto;left:auto;bottom:25px;right:70px;background:#b55bff;box-shadow:0 0 20px #b55bff}.app{position:relative;width:min(100%,470px);padding:17px;border-radius:24px;background:linear-gradient(145deg,rgba(21,25,63,.95),rgba(7,10,29,.94));border:1px solid rgba(133,123,255,.65);box-shadow:0 28px 100px #0008,0 0 45px #5934e53b;transform:rotateY(-8deg) rotateX(3deg);animation:float 6s ease-in-out infinite}.app-head{display:flex;justify-content:space-between;align-items:center;padding:3px 4px 17px;border-bottom:1px solid #ffffff10;font-size:12px;color:#b8bee8}.app-title{display:flex;gap:9px;align-items:center;font-weight:800;color:white}.tiny-logo{width:26px;height:26px;border-radius:8px;display:grid;place-items:center;background:linear-gradient(135deg,#963fff,#338eff);font-style:italic}.status{display:flex;justify-content:center;gap:8px;align-items:center;padding:17px;color:var(--mint);font-size:13px;font-weight:750}.route{display:flex;align-items:center;justify-content:space-between;padding:17px 8px 23px}.node{width:72px;text-align:center;color:#c5c9eb;font-size:11px}.node-icon{margin:0 auto 9px;width:49px;height:49px;display:grid;place-items:center;border-radius:17px;background:#11173b;border:1px solid #3d4b9a;color:#9e91ff;font-size:21px}.hub{width:95px;height:95px;border-radius:50%;display:grid;place-items:center;border:2px solid #398bff;box-shadow:0 0 30px #286cff7a,inset 0 0 22px #286cff55;position:relative;color:#fff;font-weight:1000;font-size:22px;font-style:italic}.hub:before{content:"";position:absolute;inset:8px;border:1px solid #6a72ff;border-radius:50%;animation:spin 9s linear infinite}.wire{height:2px;flex:1;background:linear-gradient(90deg,#8d54ff,#4ce9d4);position:relative;max-width:65px}.wire:after{content:"";position:absolute;width:7px;height:7px;right:10%;top:-3px;background:#64ffe1;border-radius:50%;box-shadow:0 0 12px #64ffe1;animation:travel 2s linear infinite}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.stat{background:#101432;border:1px solid #ffffff12;border-radius:13px;padding:13px 10px}.stat b{display:block;font-size:12px;margin-bottom:5px}.stat small{color:#a7add0;font-size:10px}.stat .mint{color:var(--mint)}.app-button{width:100%;margin-top:14px;padding:14px;border:0;border-radius:12px;color:white;font-weight:800;background:linear-gradient(100deg,#783aff,#367dff,#45cfff);box-shadow:0 8px 25px #315bff2e}.app-message{display:none;color:#8df9db;font-size:12px;text-align:center;margin:10px 0 0}.app-message.show{display:block;animation:fadein .3s}.float-chip{position:absolute;z-index:2;padding:11px 14px;border:1px solid #7772ff50;background:#0e1230d9;border-radius:14px;box-shadow:0 10px 35px #0005;backdrop-filter:blur(12px);font-size:12px;animation:float 5s ease-in-out infinite}.chip-a{top:40px;right:-4px}.chip-b{bottom:39px;left:-10px;animation-delay:-2s}.chip-icon{color:var(--mint);font-size:17px;margin-right:7px}
-.section{padding:76px 0}.section-head{text-align:center;max-width:660px;margin:0 auto 38px}.section-head h2{font-size:clamp(31px,4vw,48px);letter-spacing:-.055em;margin:14px 0}.section-head p{color:var(--muted);line-height:1.7}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.feature{position:relative;overflow:hidden;min-height:205px;padding:25px;border-radius:20px;background:linear-gradient(145deg,rgba(19,22,53,.85),rgba(10,12,31,.8));border:1px solid rgba(128,119,255,.2);transition:transform .25s,border-color .25s,background .25s}.feature:hover{transform:translateY(-7px);border-color:#8e6aff80;background:linear-gradient(145deg,rgba(34,29,82,.9),rgba(10,12,31,.9))}.feature:after{content:"";position:absolute;right:-50px;bottom:-80px;width:170px;height:170px;border-radius:50%;background:#653cff12;filter:blur(2px)}.feature-icon{width:48px;height:48px;border-radius:15px;display:grid;place-items:center;background:linear-gradient(145deg,#4221a5,#172e70);border:1px solid #8a7aff55;font-size:22px;box-shadow:0 0 25px #6838ff22}.feature h3{margin:20px 0 9px;font-size:18px}.feature p{margin:0;color:#aeb3d4;font-size:13px;line-height:1.65}.how-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:45px;align-items:center}.how-copy h2{font-size:clamp(33px,4vw,48px);line-height:1.05;letter-spacing:-.06em}.how-copy p{color:var(--muted);line-height:1.75}.steps{display:grid;gap:12px}.step{display:flex;gap:16px;padding:18px;border:1px solid #8b80ff26;border-radius:16px;background:#10132b9c;transition:transform .2s}.step:hover{transform:translateX(5px)}.num{width:35px;height:35px;flex:0 0 35px;border-radius:11px;background:#38216c;color:#d8c4ff;display:grid;place-items:center;font-weight:850}.step h3{font-size:15px;margin:1px 0 6px}.step p{font-size:13px;color:#aeb3d4;line-height:1.5;margin:0}
-.demo{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:stretch}.demo-panel{border:1px solid #8277ff2c;border-radius:22px;padding:25px;background:linear-gradient(145deg,#111431d9,#0b0d24d9)}.demo-panel h3{margin:0 0 8px}.demo-panel>p{color:var(--muted);font-size:13px;line-height:1.6}.range-wrap{margin:25px 0}.range-label{display:flex;justify-content:space-between;font-size:13px;color:#c7c9e3;margin-bottom:12px}input[type=range]{width:100%;accent-color:#8b4dff}.meter{height:8px;border-radius:20px;background:#252849;overflow:hidden;margin:17px 0}.meter-fill{height:100%;width:60%;background:linear-gradient(90deg,#8c40ff,#42caff);border-radius:20px;transition:width .4s}.demo-result{font-size:32px;font-weight:900;letter-spacing:-.04em}.demo-result span{font-size:13px;font-weight:500;color:var(--muted);letter-spacing:0}.disclaimer{font-size:11px!important;color:#8589ad!important}.faq{max-width:800px;margin:auto;display:grid;gap:10px}.faq-item{border:1px solid #8277ff2b;border-radius:15px;background:#11132ad1;overflow:hidden}.faq-q{width:100%;display:flex;justify-content:space-between;align-items:center;text-align:left;padding:19px 20px;background:none;color:#fff;border:0;font-weight:750}.faq-q span:last-child{font-size:21px;color:#b795ff;transition:transform .2s}.faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease}.faq-a p{padding:0 20px 20px;margin:0;color:#b0b5d5;line-height:1.7;font-size:14px}.faq-item.open .faq-a{max-height:180px}.faq-item.open .faq-q span:last-child{transform:rotate(45deg)}.final-cta{position:relative;overflow:hidden;text-align:center;border:1px solid #8170ff35;border-radius:28px;padding:55px 22px;background:radial-gradient(ellipse at 50% 0%,#5522a74a,transparent 60%),linear-gradient(145deg,#12132f,#0a0b20)}.final-cta h2{font-size:clamp(32px,5vw,55px);letter-spacing:-.06em;margin:12px 0}.final-cta p{color:var(--muted);max-width:570px;margin:0 auto 25px;line-height:1.7}.footer{padding:28px 0 36px;color:#777d9f;font-size:12px}.footer-inner{display:flex;justify-content:space-between;gap:20px;align-items:center;border-top:1px solid #ffffff12;padding-top:25px}.footer strong{color:#c8c8e7}.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}.reveal.visible{opacity:1;transform:translateY(0)}.toast{position:fixed;bottom:22px;left:50%;transform:translate(-50%,20px);opacity:0;z-index:40;background:#171a3b;border:1px solid #8d70ff70;padding:13px 18px;border-radius:13px;box-shadow:0 15px 50px #0008;transition:.25s;font-size:13px}.toast.show{opacity:1;transform:translate(-50%,0)}
-@keyframes pulse{50%{opacity:.4;box-shadow:0 0 2px var(--mint)}}@keyframes spin{to{transform:rotate(360deg)}}@keyframes orb{50%{transform:scale(1.12);opacity:.7}}@keyframes float{0%,100%{transform:translateY(0) rotateY(-8deg) rotateX(3deg)}50%{transform:translateY(-12px) rotateY(-5deg) rotateX(1deg)}}@keyframes travel{0%{right:75%}100%{right:8%}}@keyframes fadein{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
-@media(max-width:850px){.links{gap:15px}.hero{grid-template-columns:1fr;padding-top:60px}.hero-copy{text-align:center}.hero p{margin-inline:auto}.cta-row,.micro{justify-content:center}.visual{min-height:410px}.app{max-width:470px}.cards{grid-template-columns:1fr 1fr}.how-grid{grid-template-columns:1fr;gap:25px}.chip-a{right:3%}.chip-b{left:3%}}
-@media(max-width:620px){.wrap{width:min(100% - 30px,1160px)}.nav{height:68px}.brand{font-size:18px}.logo{width:36px;height:36px}.nav-actions .outline{display:none}.menu{display:block}.links{display:none;position:absolute;top:68px;left:0;right:0;padding:18px 24px 24px;background:#0b0c22;border-bottom:1px solid #8170ff33;flex-direction:column;gap:20px}.links.open{display:flex}.hero{padding:53px 0 25px;gap:8px;min-height:auto}.hero h1{font-size:clamp(48px,15vw,70px)}.hero p{font-size:14px}.cta-row{flex-direction:column}.cta-row button{width:100%}.visual{min-height:340px;margin:0 -6px}.app{padding:12px;transform:none;animation:float 6s ease-in-out infinite}.route{padding:14px 0 18px}.hub{width:70px;height:70px;font-size:18px}.node{width:57px;font-size:10px}.node-icon{width:40px;height:40px}.wire{max-width:35px}.stats{gap:5px}.stat{padding:10px 7px}.stat b{font-size:10px}.stat small{font-size:9px}.chip-a{top:0;right:0}.chip-b{bottom:0;left:0}.float-chip{font-size:10px;padding:8px 10px}.section{padding:55px 0}.cards,.demo{grid-template-columns:1fr}.feature{min-height:175px}.section-head{margin-bottom:25px}.final-cta{padding:40px 18px}.footer-inner{align-items:flex-start;flex-direction:column}.micro{gap:10px}.ring{width:290px;height:290px}.orb{width:300px;height:300px}}
-@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}.reveal{opacity:1;transform:none}}
-</style>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="theme-color" content="#08091a">
+	<title>BrawlhallaFIX — Верните мой 2022</title>
+	<meta name="description" content="BrawlhallaFIX — удобный инструмент для настройки подключения к Brawlhalla. Верните мой 2022.">
+	<style>
+	:root {
+		--bg: #070817;
+		--panel: rgba(14, 17, 43, .76);
+		--line: rgba(133, 111, 255, .27);
+		--text: #f6f5ff;
+		--muted: #aaaed0;
+		--violet: #8b35ff;
+		--blue: #37b9ff;
+		--mint: #5dffd0
+	}
+	
+	* {
+		box-sizing: border-box
+	}
+	
+	html {
+		scroll-behavior: smooth
+	}
+	
+	body {
+		margin: 0;
+		background: var(--bg);
+		color: var(--text);
+		font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+		overflow-x: hidden
+	}
+	
+	body:before {
+		content: "";
+		position: fixed;
+		inset: 0;
+		z-index: -3;
+		background: radial-gradient(ellipse at 78% 22%, rgba(83, 36, 197, .35), transparent 35%), radial-gradient(ellipse at 12% 45%, rgba(21, 90, 218, .22), transparent 33%), linear-gradient(145deg, #070817 0%, #0a0b22 54%, #100720 100%)
+	}
+	
+	body:after {
+		content: "";
+		position: fixed;
+		inset: 0;
+		pointer-events: none;
+		z-index: 5;
+		opacity: .12;
+		background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.2'/%3E%3C/svg%3E")
+	}
+	
+	a {
+		color: inherit;
+		text-decoration: none
+	}
+	
+	button {
+		font: inherit;
+		cursor: pointer
+	}
+	
+	.wrap {
+		width: min(1160px, calc(100% - 44px));
+		margin: auto
+	}
+	
+	.nav {
+		height: 78px;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		border-bottom: 1px solid rgba(155, 139, 255, .15);
+		position: sticky;
+		top: 0;
+		z-index: 20;
+		background: rgba(7, 8, 23, .76);
+		backdrop-filter: blur(18px)
+	}
+	
+	.brand {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		font-weight: 850;
+		letter-spacing: -.04em;
+		font-size: 21px
+	}
+	
+	.logo {
+		display: grid;
+		place-items: center;
+		width: 42px;
+		height: 42px;
+		border-radius: 13px;
+		background: linear-gradient(135deg, #9d3dff, #2679ff);
+		box-shadow: 0 0 28px #772dff70;
+		font-weight: 1000;
+		font-style: italic;
+		font-size: 21px
+	}
+	
+	.brand span span {
+		color: #6dbbff
+	}
+	
+	.links {
+		display: flex;
+		gap: 32px;
+		color: #c5c6e0;
+		font-size: 14px
+	}
+	
+	.links a {
+		transition: color .2s
+	}
+	
+	.links a:hover {
+		color: #fff
+	}
+	
+	.nav-actions {
+		display: flex;
+		align-items: center;
+		gap: 12px
+	}
+	
+	.outline,
+	.primary,
+	.ghost {
+		border: 1px solid var(--line);
+		border-radius: 999px;
+		padding: 12px 19px;
+		color: #fff;
+		background: rgba(22, 20, 55, .5);
+		transition: transform .2s, box-shadow .2s, border-color .2s
+	}
+	
+	.outline:hover,
+	.ghost:hover {
+		border-color: #a66bff;
+		box-shadow: 0 0 24px #793cff30;
+		transform: translateY(-2px)
+	}
+	
+	.primary {
+		border: 0;
+		background: linear-gradient(100deg, #7d2cff, #3d7cff 80%, #3ccaff);
+		font-weight: 750;
+		box-shadow: 0 8px 30px #6127ed40
+	}
+	
+	.primary:hover {
+		transform: translateY(-3px);
+		box-shadow: 0 12px 34px #6127ed75
+	}
+	
+	.menu {
+		display: none;
+		background: none;
+		color: white;
+		border: 0;
+		font-size: 25px
+	}
+	
+	.hero {
+		position: relative;
+		min-height: 650px;
+		display: grid;
+		grid-template-columns: 1.02fr .98fr;
+		align-items: center;
+		gap: 30px;
+		padding: 65px 0 52px
+	}
+	
+	.eyebrow {
+		display: inline-flex;
+		align-items: center;
+		gap: 10px;
+		color: #b68cff;
+		font-size: 11px;
+		font-weight: 850;
+		letter-spacing: .19em;
+		text-transform: uppercase
+	}
+	
+	.dot {
+		width: 7px;
+		height: 7px;
+		border-radius: 50%;
+		background: var(--mint);
+		box-shadow: 0 0 12px var(--mint);
+		animation: pulse 1.7s infinite
+	}
+	
+	.hero h1 {
+		font-size: clamp(54px, 7vw, 88px);
+		line-height: .96;
+		letter-spacing: -.075em;
+		margin: 24px 0 22px;
+		font-weight: 950
+	}
+	
+	.gradient {
+		display: block;
+		background: linear-gradient(100deg, #a53dff 5%, #587bff 50%, #4be5ff 90%);
+		color: transparent;
+		background-clip: text;
+		-webkit-background-clip: text;
+		text-shadow: 0 0 45px #6e36ff24
+	}
+	
+	.hero p {
+		max-width: 500px;
+		color: #b9bddc;
+		line-height: 1.7;
+		font-size: 16px
+	}
+	
+	.cta-row {
+		display: flex;
+		gap: 13px;
+		flex-wrap: wrap;
+		margin-top: 30px
+	}
+	
+	.cta-row button {
+		padding: 15px 22px
+	}
+	
+	.micro {
+		display: flex;
+		gap: 20px;
+		flex-wrap: wrap;
+		color: #858aaf;
+		font-size: 12px;
+		margin-top: 25px
+	}
+	
+	.micro span {
+		display: flex;
+		align-items: center;
+		gap: 7px
+	}
+	
+	.check {
+		color: var(--mint)
+	}
+	
+	.visual {
+		position: relative;
+		min-height: 440px;
+		display: grid;
+		place-items: center;
+		perspective: 1000px
+	}
+	
+	.orb {
+		position: absolute;
+		width: 350px;
+		height: 350px;
+		border-radius: 50%;
+		background: radial-gradient(circle, rgba(87, 56, 255, .27), rgba(27, 117, 255, .07) 48%, transparent 70%);
+		filter: blur(4px);
+		animation: orb 7s ease-in-out infinite
+	}
+	
+	.ring {
+		position: absolute;
+		width: 350px;
+		height: 350px;
+		border: 1px solid rgba(91, 104, 255, .3);
+		border-radius: 50%;
+		animation: spin 24s linear infinite
+	}
+	
+	.ring:before,
+	.ring:after {
+		content: "";
+		position: absolute;
+		width: 9px;
+		height: 9px;
+		border-radius: 50%;
+		background: #65caff;
+		box-shadow: 0 0 20px #65caff;
+		top: 38px;
+		left: 52px
+	}
+	
+	.ring:after {
+		top: auto;
+		left: auto;
+		bottom: 25px;
+		right: 70px;
+		background: #b55bff;
+		box-shadow: 0 0 20px #b55bff
+	}
+	
+	.app {
+		position: relative;
+		width: min(100%, 470px);
+		padding: 17px;
+		border-radius: 24px;
+		background: linear-gradient(145deg, rgba(21, 25, 63, .95), rgba(7, 10, 29, .94));
+		border: 1px solid rgba(133, 123, 255, .65);
+		box-shadow: 0 28px 100px #0008, 0 0 45px #5934e53b;
+		transform: rotateY(-8deg) rotateX(3deg);
+		animation: float 6s ease-in-out infinite
+	}
+	
+	.app-head {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 3px 4px 17px;
+		border-bottom: 1px solid #ffffff10;
+		font-size: 12px;
+		color: #b8bee8
+	}
+	
+	.app-title {
+		display: flex;
+		gap: 9px;
+		align-items: center;
+		font-weight: 800;
+		color: white
+	}
+	
+	.tiny-logo {
+		width: 26px;
+		height: 26px;
+		border-radius: 8px;
+		display: grid;
+		place-items: center;
+		background: linear-gradient(135deg, #963fff, #338eff);
+		font-style: italic
+	}
+	
+	.status {
+		display: flex;
+		justify-content: center;
+		gap: 8px;
+		align-items: center;
+		padding: 17px;
+		color: var(--mint);
+		font-size: 13px;
+		font-weight: 750
+	}
+	
+	.route {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 17px 8px 23px
+	}
+	
+	.node {
+		width: 72px;
+		text-align: center;
+		color: #c5c9eb;
+		font-size: 11px
+	}
+	
+	.node-icon {
+		margin: 0 auto 9px;
+		width: 49px;
+		height: 49px;
+		display: grid;
+		place-items: center;
+		border-radius: 17px;
+		background: #11173b;
+		border: 1px solid #3d4b9a;
+		color: #9e91ff;
+		font-size: 21px
+	}
+	
+	.hub {
+		width: 95px;
+		height: 95px;
+		border-radius: 50%;
+		display: grid;
+		place-items: center;
+		border: 2px solid #398bff;
+		box-shadow: 0 0 30px #286cff7a, inset 0 0 22px #286cff55;
+		position: relative;
+		color: #fff;
+		font-weight: 1000;
+		font-size: 22px;
+		font-style: italic
+	}
+	
+	.hub:before {
+		content: "";
+		position: absolute;
+		inset: 8px;
+		border: 1px solid #6a72ff;
+		border-radius: 50%;
+		animation: spin 9s linear infinite
+	}
+	
+	.wire {
+		height: 2px;
+		flex: 1;
+		background: linear-gradient(90deg, #8d54ff, #4ce9d4);
+		position: relative;
+		max-width: 65px
+	}
+	
+	.wire:after {
+		content: "";
+		position: absolute;
+		width: 7px;
+		height: 7px;
+		right: 10%;
+		top: -3px;
+		background: #64ffe1;
+		border-radius: 50%;
+		box-shadow: 0 0 12px #64ffe1;
+		animation: travel 2s linear infinite
+	}
+	
+	.stats {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 8px
+	}
+	
+	.stat {
+		background: #101432;
+		border: 1px solid #ffffff12;
+		border-radius: 13px;
+		padding: 13px 10px
+	}
+	
+	.stat b {
+		display: block;
+		font-size: 12px;
+		margin-bottom: 5px
+	}
+	
+	.stat small {
+		color: #a7add0;
+		font-size: 10px
+	}
+	
+	.stat .mint {
+		color: var(--mint)
+	}
+	
+	.app-button {
+		width: 100%;
+		margin-top: 14px;
+		padding: 14px;
+		border: 0;
+		border-radius: 12px;
+		color: white;
+		font-weight: 800;
+		background: linear-gradient(100deg, #783aff, #367dff, #45cfff);
+		box-shadow: 0 8px 25px #315bff2e
+	}
+	
+	.app-message {
+		display: none;
+		color: #8df9db;
+		font-size: 12px;
+		text-align: center;
+		margin: 10px 0 0
+	}
+	
+	.app-message.show {
+		display: block;
+		animation: fadein .3s
+	}
+	
+	.float-chip {
+		position: absolute;
+		z-index: 2;
+		padding: 11px 14px;
+		border: 1px solid #7772ff50;
+		background: #0e1230d9;
+		border-radius: 14px;
+		box-shadow: 0 10px 35px #0005;
+		backdrop-filter: blur(12px);
+		font-size: 12px;
+		animation: float 5s ease-in-out infinite
+	}
+	
+	.chip-a {
+		top: 40px;
+		right: -4px
+	}
+	
+	.chip-b {
+		bottom: 39px;
+		left: -10px;
+		animation-delay: -2s
+	}
+	
+	.chip-icon {
+		color: var(--mint);
+		font-size: 17px;
+		margin-right: 7px
+	}
+	
+	.section {
+		padding: 76px 0
+	}
+	
+	.section-head {
+		text-align: center;
+		max-width: 660px;
+		margin: 0 auto 38px
+	}
+	
+	.section-head h2 {
+		font-size: clamp(31px, 4vw, 48px);
+		letter-spacing: -.055em;
+		margin: 14px 0
+	}
+	
+	.section-head p {
+		color: var(--muted);
+		line-height: 1.7
+	}
+	
+	.cards {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 16px
+	}
+	
+	.feature {
+		position: relative;
+		overflow: hidden;
+		min-height: 205px;
+		padding: 25px;
+		border-radius: 20px;
+		background: linear-gradient(145deg, rgba(19, 22, 53, .85), rgba(10, 12, 31, .8));
+		border: 1px solid rgba(128, 119, 255, .2);
+		transition: transform .25s, border-color .25s, background .25s
+	}
+	
+	.feature:hover {
+		transform: translateY(-7px);
+		border-color: #8e6aff80;
+		background: linear-gradient(145deg, rgba(34, 29, 82, .9), rgba(10, 12, 31, .9))
+	}
+	
+	.feature:after {
+		content: "";
+		position: absolute;
+		right: -50px;
+		bottom: -80px;
+		width: 170px;
+		height: 170px;
+		border-radius: 50%;
+		background: #653cff12;
+		filter: blur(2px)
+	}
+	
+	.feature-icon {
+		width: 48px;
+		height: 48px;
+		border-radius: 15px;
+		display: grid;
+		place-items: center;
+		background: linear-gradient(145deg, #4221a5, #172e70);
+		border: 1px solid #8a7aff55;
+		font-size: 22px;
+		box-shadow: 0 0 25px #6838ff22
+	}
+	
+	.feature h3 {
+		margin: 20px 0 9px;
+		font-size: 18px
+	}
+	
+	.feature p {
+		margin: 0;
+		color: #aeb3d4;
+		font-size: 13px;
+		line-height: 1.65
+	}
+	
+	.how-grid {
+		display: grid;
+		grid-template-columns: .8fr 1.2fr;
+		gap: 45px;
+		align-items: center
+	}
+	
+	.how-copy h2 {
+		font-size: clamp(33px, 4vw, 48px);
+		line-height: 1.05;
+		letter-spacing: -.06em
+	}
+	
+	.how-copy p {
+		color: var(--muted);
+		line-height: 1.75
+	}
+	
+	.steps {
+		display: grid;
+		gap: 12px
+	}
+	
+	.step {
+		display: flex;
+		gap: 16px;
+		padding: 18px;
+		border: 1px solid #8b80ff26;
+		border-radius: 16px;
+		background: #10132b9c;
+		transition: transform .2s
+	}
+	
+	.step:hover {
+		transform: translateX(5px)
+	}
+	
+	.num {
+		width: 35px;
+		height: 35px;
+		flex: 0 0 35px;
+		border-radius: 11px;
+		background: #38216c;
+		color: #d8c4ff;
+		display: grid;
+		place-items: center;
+		font-weight: 850
+	}
+	
+	.step h3 {
+		font-size: 15px;
+		margin: 1px 0 6px
+	}
+	
+	.step p {
+		font-size: 13px;
+		color: #aeb3d4;
+		line-height: 1.5;
+		margin: 0
+	}
+	
+	.demo {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 20px;
+		align-items: stretch
+	}
+	
+	.demo-panel {
+		border: 1px solid #8277ff2c;
+		border-radius: 22px;
+		padding: 25px;
+		background: linear-gradient(145deg, #111431d9, #0b0d24d9)
+	}
+	
+	.demo-panel h3 {
+		margin: 0 0 8px
+	}
+	
+	.demo-panel>p {
+		color: var(--muted);
+		font-size: 13px;
+		line-height: 1.6
+	}
+	
+	.range-wrap {
+		margin: 25px 0
+	}
+	
+	.range-label {
+		display: flex;
+		justify-content: space-between;
+		font-size: 13px;
+		color: #c7c9e3;
+		margin-bottom: 12px
+	}
+	
+	input[type=range] {
+		width: 100%;
+		accent-color: #8b4dff
+	}
+	
+	.meter {
+		height: 8px;
+		border-radius: 20px;
+		background: #252849;
+		overflow: hidden;
+		margin: 17px 0
+	}
+	
+	.meter-fill {
+		height: 100%;
+		width: 60%;
+		background: linear-gradient(90deg, #8c40ff, #42caff);
+		border-radius: 20px;
+		transition: width .4s
+	}
+	
+	.demo-result {
+		font-size: 32px;
+		font-weight: 900;
+		letter-spacing: -.04em
+	}
+	
+	.demo-result span {
+		font-size: 13px;
+		font-weight: 500;
+		color: var(--muted);
+		letter-spacing: 0
+	}
+	
+	.disclaimer {
+		font-size: 11px!important;
+		color: #8589ad!important
+	}
+	
+	.faq {
+		max-width: 800px;
+		margin: auto;
+		display: grid;
+		gap: 10px
+	}
+	
+	.faq-item {
+		border: 1px solid #8277ff2b;
+		border-radius: 15px;
+		background: #11132ad1;
+		overflow: hidden
+	}
+	
+	.faq-q {
+		width: 100%;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		text-align: left;
+		padding: 19px 20px;
+		background: none;
+		color: #fff;
+		border: 0;
+		font-weight: 750
+	}
+	
+	.faq-q span:last-child {
+		font-size: 21px;
+		color: #b795ff;
+		transition: transform .2s
+	}
+	
+	.faq-a {
+		max-height: 0;
+		overflow: hidden;
+		transition: max-height .35s ease
+	}
+	
+	.faq-a p {
+		padding: 0 20px 20px;
+		margin: 0;
+		color: #b0b5d5;
+		line-height: 1.7;
+		font-size: 14px
+	}
+	
+	.faq-item.open .faq-a {
+		max-height: 180px
+	}
+	
+	.faq-item.open .faq-q span:last-child {
+		transform: rotate(45deg)
+	}
+	
+	.final-cta {
+		position: relative;
+		overflow: hidden;
+		text-align: center;
+		border: 1px solid #8170ff35;
+		border-radius: 28px;
+		padding: 55px 22px;
+		background: radial-gradient(ellipse at 50% 0%, #5522a74a, transparent 60%), linear-gradient(145deg, #12132f, #0a0b20)
+	}
+	
+	.final-cta h2 {
+		font-size: clamp(32px, 5vw, 55px);
+		letter-spacing: -.06em;
+		margin: 12px 0
+	}
+	
+	.final-cta p {
+		color: var(--muted);
+		max-width: 570px;
+		margin: 0 auto 25px;
+		line-height: 1.7
+	}
+	
+	.footer {
+		padding: 28px 0 36px;
+		color: #777d9f;
+		font-size: 12px
+	}
+	
+	.footer-inner {
+		display: flex;
+		justify-content: space-between;
+		gap: 20px;
+		align-items: center;
+		border-top: 1px solid #ffffff12;
+		padding-top: 25px
+	}
+	
+	.footer strong {
+		color: #c8c8e7
+	}
+	
+	.reveal {
+		opacity: 0;
+		transform: translateY(20px);
+		transition: opacity .7s ease, transform .7s ease
+	}
+	
+	.reveal.visible {
+		opacity: 1;
+		transform: translateY(0)
+	}
+	
+	.toast {
+		position: fixed;
+		bottom: 22px;
+		left: 50%;
+		transform: translate(-50%, 20px);
+		opacity: 0;
+		z-index: 40;
+		background: #171a3b;
+		border: 1px solid #8d70ff70;
+		padding: 13px 18px;
+		border-radius: 13px;
+		box-shadow: 0 15px 50px #0008;
+		transition: .25s;
+		font-size: 13px
+	}
+	
+	.toast.show {
+		opacity: 1;
+		transform: translate(-50%, 0)
+	}
+	
+	@keyframes pulse {
+		50% {
+			opacity: .4;
+			box-shadow: 0 0 2px var(--mint)
+		}
+	}
+	
+	@keyframes spin {
+		to {
+			transform: rotate(360deg)
+		}
+	}
+	
+	@keyframes orb {
+		50% {
+			transform: scale(1.12);
+			opacity: .7
+		}
+	}
+	
+	@keyframes float {
+		0%,
+		100% {
+			transform: translateY(0) rotateY(-8deg) rotateX(3deg)
+		}
+		50% {
+			transform: translateY(-12px) rotateY(-5deg) rotateX(1deg)
+		}
+	}
+	
+	@keyframes travel {
+		0% {
+			right: 75%
+		}
+		100% {
+			right: 8%
+		}
+	}
+	
+	@keyframes fadein {
+		from {
+			opacity: 0;
+			transform: translateY(4px)
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0)
+		}
+	}
+	
+	@media(max-width:850px) {
+		.links {
+			gap: 15px
+		}
+		.hero {
+			grid-template-columns: 1fr;
+			padding-top: 60px
+		}
+		.hero-copy {
+			text-align: center
+		}
+		.hero p {
+			margin-inline: auto
+		}
+		.cta-row,
+		.micro {
+			justify-content: center
+		}
+		.visual {
+			min-height: 410px
+		}
+		.app {
+			max-width: 470px
+		}
+		.cards {
+			grid-template-columns: 1fr 1fr
+		}
+		.how-grid {
+			grid-template-columns: 1fr;
+			gap: 25px
+		}
+		.chip-a {
+			right: 3%
+		}
+		.chip-b {
+			left: 3%
+		}
+	}
+	
+	@media(max-width:620px) {
+		.wrap {
+			width: min(100% - 30px, 1160px)
+		}
+		.nav {
+			height: 68px
+		}
+		.brand {
+			font-size: 18px
+		}
+		.logo {
+			width: 36px;
+			height: 36px
+		}
+		.nav-actions .outline {
+			display: none
+		}
+		.menu {
+			display: block
+		}
+		.links {
+			display: none;
+			position: absolute;
+			top: 68px;
+			left: 0;
+			right: 0;
+			padding: 18px 24px 24px;
+			background: #0b0c22;
+			border-bottom: 1px solid #8170ff33;
+			flex-direction: column;
+			gap: 20px
+		}
+		.links.open {
+			display: flex
+		}
+		.hero {
+			padding: 53px 0 25px;
+			gap: 8px;
+			min-height: auto
+		}
+		.hero h1 {
+			font-size: clamp(48px, 15vw, 70px)
+		}
+		.hero p {
+			font-size: 14px
+		}
+		.cta-row {
+			flex-direction: column
+		}
+		.cta-row button {
+			width: 100%
+		}
+		.visual {
+			min-height: 340px;
+			margin: 0 -6px
+		}
+		.app {
+			padding: 12px;
+			transform: none;
+			animation: float 6s ease-in-out infinite
+		}
+		.route {
+			padding: 14px 0 18px
+		}
+		.hub {
+			width: 70px;
+			height: 70px;
+			font-size: 18px
+		}
+		.node {
+			width: 57px;
+			font-size: 10px
+		}
+		.node-icon {
+			width: 40px;
+			height: 40px
+		}
+		.wire {
+			max-width: 35px
+		}
+		.stats {
+			gap: 5px
+		}
+		.stat {
+			padding: 10px 7px
+		}
+		.stat b {
+			font-size: 10px
+		}
+		.stat small {
+			font-size: 9px
+		}
+		.chip-a {
+			top: 0;
+			right: 0
+		}
+		.chip-b {
+			bottom: 0;
+			left: 0
+		}
+		.float-chip {
+			font-size: 10px;
+			padding: 8px 10px
+		}
+		.section {
+			padding: 55px 0
+		}
+		.cards,
+		.demo {
+			grid-template-columns: 1fr
+		}
+		.feature {
+			min-height: 175px
+		}
+		.section-head {
+			margin-bottom: 25px
+		}
+		.final-cta {
+			padding: 40px 18px
+		}
+		.footer-inner {
+			align-items: flex-start;
+			flex-direction: column
+		}
+		.micro {
+			gap: 10px
+		}
+		.ring {
+			width: 290px;
+			height: 290px
+		}
+		.orb {
+			width: 300px;
+			height: 300px
+		}
+	}
+	
+	@media(prefers-reduced-motion:reduce) {
+		*,
+		*:before,
+		*:after {
+			animation-duration: .01ms!important;
+			animation-iteration-count: 1!important;
+			scroll-behavior: auto!important;
+			transition-duration: .01ms!important
+		}
+		.reveal {
+			opacity: 1;
+			transform: none
+		}
+	}
+	</style>
 </head>
+
 <body>
-<header class="nav">
- <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;width:min(1160px,calc(100% - 44px))">
-  <a class="brand" href="#top" aria-label="BrawlhallaFIX — на главную"><span class="logo">BF</span><span>Brawlhalla<span>FIX</span></span></a>
-  <nav class="links" id="navLinks"><a href="#features">Возможности</a><a href="#how">Как работает</a><a href="#latency">Подключение</a><a href="#faq">FAQ</a></nav>
-  <div class="nav-actions"><button class="outline" data-toast="Раздел лицензии можно подключить к вашей системе активации.">⌁ Лицензия</button><button class="menu" id="menuBtn" aria-label="Открыть меню">☰</button></div>
- </div>
-</header>
-<main id="top">
-<section class="wrap hero">
- <div class="hero-copy reveal">
-  <div class="eyebrow"><span class="dot"></span> СТАБИЛЬНОЕ ПОДКЛЮЧЕНИЕ · БОЛЬШЕ КОНТРОЛЯ</div>
-  <h1>Верните мой <span class="gradient">2022.</span></h1>
-  <p>Те самые вечера, быстрые решения и матчи, в которых всё зависело только от тебя. BrawlhallaFIX помогает настроить подключение к игре — без лишней сложности.</p>
-  <div class="cta-row"><button class="primary" data-scroll="#download">↓ Попробовать BrawlhallaFIX <span aria-hidden="true">↗</span></button><button class="ghost" data-scroll="#how">▷ Как это работает</button></div>
-  <div class="micro"><span><b class="check">✓</b> Быстрый запуск</span><span><b class="check">✓</b> Понятные настройки</span><span><b class="check">✓</b> Ты решаешь, когда играть</span></div>
- </div>
- <div class="visual reveal" aria-label="Иллюстрация приложения BrawlhallaFIX">
-  <div class="orb"></div><div class="ring"></div>
-  <div class="float-chip chip-a"><span class="chip-icon">✦</span>Настройка в пару кликов</div>
-  <div class="float-chip chip-b"><span class="chip-icon">⌁</span>Подключение под контролем</div>
-  <div class="app">
-   <div class="app-head"><div class="app-title"><span class="tiny-logo">BF</span>BrawlhallaFIX</div><span>—　□　×</span></div>
-   <div class="status"><span class="dot"></span><span id="connectionStatus">Готово к запуску</span></div>
-   <div class="route"><div class="node"><div class="node-icon">▣</div>Твой ПК</div><div class="wire"></div><div class="hub">BF</div><div class="wire"></div><div class="node"><div class="node-icon">▤</div>Игровой сервер</div></div>
-   <div class="stats"><div class="stat"><b>Маршрут</b><small class="mint">Настраиваемый</small></div><div class="stat"><b>Задержка</b><small>Зависит от сети</small></div><div class="stat"><b>Статус</b><small class="mint" id="miniStatus">Ожидание</small></div></div>
-   <button class="app-button" id="checkConnection">Проверить подключение ↗</button><div class="app-message" id="appMessage">Демо-интерфейс: реальная проверка сети не выполнялась.</div>
-  </div>
- </div>
-</section>
-<section class="wrap section" id="features">
- <div class="section-head reveal"><div class="eyebrow">МЕНЬШЕ СЛОЖНОСТИ · БОЛЬШЕ ИГРЫ</div><h2>Твой матч. Твои правила.</h2><p>Инструменты, которые помогают привести подключение в порядок и не отвлекают от главного — самой игры.</p></div>
- <div class="cards">
-  <article class="feature reveal"><div class="feature-icon">ϟ</div><h3>Прямой путь к игре</h3><p>Идея — убрать лишние промежуточные шаги там, где это возможно, и сделать маршрут подключения понятнее.</p></article>
-  <article class="feature reveal"><div class="feature-icon">◷</div><h3>Меньше лишней задержки</h3><p>Стабильный маршрут может помочь уменьшить сетевые накладки. Фактический пинг зависит от провайдера, региона и сервера.</p></article>
-  <article class="feature reveal"><div class="feature-icon">✧</div><h3>Запуск без головной боли</h3><p>Удобный интерфейс, быстрый доступ к основным действиям и меньше ручной возни перед матчем.</p></article>
-  <article class="feature reveal"><div class="feature-icon">⌘</div><h3>Настройки под себя</h3><p>Выбирай подходящий режим и управляй подключением без необходимости каждый раз разбираться в деталях.</p></article>
-  <article class="feature reveal"><div class="feature-icon">◈</div><h3>Всё видно сразу</h3><p>Состояние приложения и доступные действия собраны в одном месте — никаких загадочных окон и лишнего шума.</p></article>
-  <article class="feature reveal"><div class="feature-icon">⟲</div><h3>Быстро вернуться в игру</h3><p>Открыл, выбрал нужный режим, запустил. BrawlhallaFIX создан, чтобы подготовка занимала меньше внимания.</p></article>
- </div>
-</section>
-<section class="section" id="how"><div class="wrap how-grid">
- <div class="how-copy reveal"><div class="eyebrow">ТРИ ШАГА ДО МАТЧА</div><h2>Никакой магии.<br><span class="gradient">Только контроль.</span></h2><p>Не нужно быть сетевым инженером, чтобы начать. Интерфейс помогает пройти путь от запуска до проверки состояния.</p><button class="primary" data-scroll="#download">Начать знакомство ↗</button></div>
- <div class="steps">
-  <div class="step reveal"><div class="num">01</div><div><h3>Открой BrawlhallaFIX</h3><p>Запусти приложение и посмотри на текущее состояние.</p></div></div>
-  <div class="step reveal"><div class="num">02</div><div><h3>Выбери режим</h3><p>Подбери доступные настройки под свою ситуацию и привычный способ игры.</p></div></div>
-  <div class="step reveal"><div class="num">03</div><div><h3>Проверь и играй</h3><p>Запусти выбранный режим и оцени результат в своей сети и регионе.</p></div></div>
- </div>
-</div></section>
-<section class="wrap section" id="latency">
- <div class="section-head reveal"><div class="eyebrow">ИНТЕРАКТИВНАЯ ДЕМО</div><h2>Задержка — это ощущение.</h2><p>Поиграй с условными значениями и посмотри, как меняется шкала. Это иллюстрация, а не измерение твоей сети.</p></div>
- <div class="demo">
-  <div class="demo-panel reveal"><h3>Симулятор пинга</h3><p>Выбери условную задержку и сравни, как она воспринимается в динамичном матче.</p>
-   <div class="range-wrap"><div class="range-label"><label for="pingRange">Условная задержка</label><strong><span id="pingValue">42</span> мс</strong></div><input id="pingRange" type="range" min="10" max="180" value="42" step="1"><div class="meter"><div class="meter-fill" id="meterFill"></div></div></div>
-   <div class="demo-result" id="pingMood">Плавно <span>— условная оценка</span></div><p class="disclaimer">Показатель демонстрационный. BrawlhallaFIX не гарантирует конкретный пинг или его снижение.</p>
-  </div>
-  <div class="demo-panel reveal"><h3>Что влияет на результат?</h3><p>Даже удачные настройки не отменяют физику расстояния и состояние сети. Вот что важно учитывать.</p>
-   <div class="step"><div class="num">⌖</div><div><h3>Регион сервера</h3><p>Чем дальше сервер, тем больше времени обычно требуется данным на путь туда и обратно.</p></div></div>
-   <div class="step" style="margin-top:10px"><div class="num">⌁</div><div><h3>Качество сети</h3><p>Потери пакетов, перегрузка Wi‑Fi и скачки маршрута влияют на стабильность матча.</p></div></div>
-  </div>
- </div>
-</section>
-<section class="wrap section" id="faq">
- <div class="section-head reveal"><div class="eyebrow">ЕСТЬ ВОПРОСЫ?</div><h2>Коротко и по делу.</h2><p>Никаких обещаний невозможного — только понятные ответы.</p></div>
- <div class="faq">
-  <div class="faq-item"><button class="faq-q"><span>BrawlhallaFIX гарантирует снижение пинга?</span><span>＋</span></button><div class="faq-a"><p>Нет. Задержка зависит от расстояния до сервера, провайдера, загруженности сети и других факторов. Приложение помогает управлять настройками подключения, но результат нужно проверять в конкретных условиях.</p></div></div>
-  <div class="faq-item"><button class="faq-q"><span>Нужно ли разбираться в сетевых настройках?</span><span>＋</span></button><div class="faq-a"><p>Нет, интерфейс задуман так, чтобы основные действия были доступны без глубоких технических знаний. Просто следуй подсказкам приложения.</p></div></div>
-  <div class="faq-item"><button class="faq-q"><span>Это официальный продукт Brawlhalla?</span><span>＋</span></button><div class="faq-a"><p>Нет. BrawlhallaFIX — независимый проект и не связан с разработчиками или издателями Brawlhalla.</p></div></div>
-  <div class="faq-item"><button class="faq-q"><span>Что делать, если соединение не стало лучше?</span><span>＋</span></button><div class="faq-a"><p>Попробуй другой доступный режим, проверь выбранный регион игры и качество локальной сети. Иногда причина находится вне возможностей приложения.</p></div></div>
- </div>
-</section>
-<section class="wrap section" id="download"><div class="final-cta reveal"><div class="eyebrow"><span class="dot"></span> ВРЕМЯ ВЕРНУТЬСЯ НА АРЕНУ</div><h2>Верните мой <span class="gradient">2022.</span></h2><p>Меньше возни перед матчем. Больше внимания игре. Сделай следующий запуск проще.</p><button class="primary" id="downloadBtn">Скачать BrawlhallaFIX ↗</button><p class="disclaimer" style="margin-top:14px;margin-bottom:0">Кнопку можно связать с актуальной ссылкой на загрузку перед публикацией сайта.</p></div></section>
-</main>
-<footer class="footer"><div class="wrap footer-inner"><div><strong>BrawlhallaFIX</strong> · Верните мой 2022.</div><div>Независимый проект. Не аффилирован с Brawlhalla.</div><a href="#top">Наверх ↑</a></div></footer>
-<div class="toast" id="toast" role="status" aria-live="polite"></div>
-<script>
-const toastEl=document.getElementById('toast');let toastTimer;
-function toast(message){toastEl.textContent=message;toastEl.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>toastEl.classList.remove('show'),3000)}
-document.querySelectorAll('[data-toast]').forEach(b=>b.addEventListener('click',()=>toast(b.dataset.toast)));
-document.querySelectorAll('[data-scroll]').forEach(b=>b.addEventListener('click',()=>document.querySelector(b.dataset.scroll)?.scrollIntoView({behavior:'smooth'})));
-const menuBtn=document.getElementById('menuBtn'),navLinks=document.getElementById('navLinks');menuBtn.addEventListener('click',()=>{navLinks.classList.toggle('open');menuBtn.textContent=navLinks.classList.contains('open')?'×':'☰'});navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{navLinks.classList.remove('open');menuBtn.textContent='☰'}));
-document.querySelectorAll('.faq-q').forEach(q=>q.addEventListener('click',()=>{const item=q.closest('.faq-item');const wasOpen=item.classList.contains('open');document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));if(!wasOpen)item.classList.add('open')}));
-const range=document.getElementById('pingRange'),pingValue=document.getElementById('pingValue'),meterFill=document.getElementById('meterFill'),pingMood=document.getElementById('pingMood');
-function updatePing(){const v=+range.value;pingValue.textContent=v;meterFill.style.width=(v/180*100)+'%';let label=v<35?'Очень отзывчиво':v<65?'Плавно':v<100?'Ощутимая задержка':'Высокая задержка';pingMood.innerHTML=label+' <span>— условная оценка</span>'}
-range.addEventListener('input',updatePing);updatePing();
-document.getElementById('checkConnection').addEventListener('click',()=>{const s=document.getElementById('connectionStatus'),m=document.getElementById('miniStatus'),msg=document.getElementById('appMessage');s.textContent='Демонстрация проверки';m.textContent='Демо';msg.classList.add('show');toast('Это визуальная демонстрация — реальная сеть не проверялась.');});
-document.getElementById('downloadBtn').addEventListener('click',()=>toast('Добавьте сюда прямую ссылку на актуальный установщик BrawlhallaFIX.'));
-const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}}),{threshold:.12});document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
-document.querySelectorAll('.feature').forEach(card=>card.addEventListener('pointermove',e=>{const r=card.getBoundingClientRect();card.style.setProperty('--mx',((e.clientX-r.left)/r.width*100)+'%');card.style.setProperty('--my',((e.clientY-r.top)/r.height*100)+'%')}));
-</script>
+	<header class="nav">
+		<div class="wrap" style="display:flex;align-items:center;justify-content:space-between;width:min(1160px,calc(100% - 44px))"> <a class="brand" href="#top" aria-label="BrawlhallaFIX — на главную"><span class="logo">BF</span><span>Brawlhalla<span>FIX</span></span></a>
+			<nav class="links" id="navLinks"><a href="#features">Возможности</a><a href="#how">Как работает</a><a href="#latency">Подключение</a><a href="#faq">FAQ</a></nav>
+			<div class="nav-actions">
+				<button class="outline" data-toast="Раздел лицензии можно подключить к вашей системе активации.">⌁ Лицензия</button>
+				<button class="menu" id="menuBtn" aria-label="Открыть меню">☰</button>
+			</div>
+		</div>
+	</header>
+	<main id="top">
+		<section class="wrap hero">
+			<div class="hero-copy reveal">
+				<div class="eyebrow"><span class="dot"></span> СТАБИЛЬНОЕ ПОДКЛЮЧЕНИЕ · БОЛЬШЕ КОНТРОЛЯ</div>
+				<h1>Верните мой <span class="gradient">2022.</span></h1>
+				<p>Те самые вечера, быстрые решения и матчи, в которых всё зависело только от тебя. BrawlhallaFIX помогает настроить подключение к игре — без лишней сложности.</p>
+				<div class="cta-row">
+					<button class="primary" data-scroll="#download">↓ Попробовать BrawlhallaFIX <span aria-hidden="true">↗</span></button>
+					<button class="ghost" data-scroll="#how">▷ Как это работает</button>
+				</div>
+				<div class="micro"><span><b class="check">✓</b> Быстрый запуск</span><span><b class="check">✓</b> Понятные настройки</span><span><b class="check">✓</b> Ты решаешь, когда играть</span></div>
+			</div>
+			<div class="visual reveal" aria-label="Иллюстрация приложения BrawlhallaFIX">
+				<div class="orb"></div>
+				<div class="ring"></div>
+				<div class="float-chip chip-a"><span class="chip-icon">✦</span>Настройка в пару кликов</div>
+				<div class="float-chip chip-b"><span class="chip-icon">⌁</span>Подключение под контролем</div>
+				<div class="app">
+					<div class="app-head">
+						<div class="app-title"><span class="tiny-logo">BF</span>BrawlhallaFIX</div><span>—　□　×</span></div>
+					<div class="status"><span class="dot"></span><span id="connectionStatus">Готово к запуску</span></div>
+					<div class="route">
+						<div class="node">
+							<div class="node-icon">▣</div>Твой ПК</div>
+						<div class="wire"></div>
+						<div class="hub">BF</div>
+						<div class="wire"></div>
+						<div class="node">
+							<div class="node-icon">▤</div>Игровой сервер</div>
+					</div>
+					<div class="stats">
+						<div class="stat"><b>Маршрут</b><small class="mint">Настраиваемый</small></div>
+						<div class="stat"><b>Задержка</b><small>Зависит от сети</small></div>
+						<div class="stat"><b>Статус</b><small class="mint" id="miniStatus">Ожидание</small></div>
+					</div>
+					<button class="app-button" id="checkConnection">Проверить подключение ↗</button>
+					<div class="app-message" id="appMessage">Демо-интерфейс: реальная проверка сети не выполнялась.</div>
+				</div>
+			</div>
+		</section>
+		<section class="wrap section" id="features">
+			<div class="section-head reveal">
+				<div class="eyebrow">МЕНЬШЕ СЛОЖНОСТИ · БОЛЬШЕ ИГРЫ</div>
+				<h2>Твой матч. Твои правила.</h2>
+				<p>Инструменты, которые помогают привести подключение в порядок и не отвлекают от главного — самой игры.</p>
+			</div>
+			<div class="cards">
+				<article class="feature reveal">
+					<div class="feature-icon">ϟ</div>
+					<h3>Прямой путь к игре</h3>
+					<p>Идея — убрать лишние промежуточные шаги там, где это возможно, и сделать маршрут подключения понятнее.</p>
+				</article>
+				<article class="feature reveal">
+					<div class="feature-icon">◷</div>
+					<h3>Меньше лишней задержки</h3>
+					<p>Стабильный маршрут может помочь уменьшить сетевые накладки. Фактический пинг зависит от провайдера, региона и сервера.</p>
+				</article>
+				<article class="feature reveal">
+					<div class="feature-icon">✧</div>
+					<h3>Запуск без головной боли</h3>
+					<p>Удобный интерфейс, быстрый доступ к основным действиям и меньше ручной возни перед матчем.</p>
+				</article>
+				<article class="feature reveal">
+					<div class="feature-icon">⌘</div>
+					<h3>Настройки под себя</h3>
+					<p>Выбирай подходящий режим и управляй подключением без необходимости каждый раз разбираться в деталях.</p>
+				</article>
+				<article class="feature reveal">
+					<div class="feature-icon">◈</div>
+					<h3>Всё видно сразу</h3>
+					<p>Состояние приложения и доступные действия собраны в одном месте — никаких загадочных окон и лишнего шума.</p>
+				</article>
+				<article class="feature reveal">
+					<div class="feature-icon">⟲</div>
+					<h3>Быстро вернуться в игру</h3>
+					<p>Открыл, выбрал нужный режим, запустил. BrawlhallaFIX создан, чтобы подготовка занимала меньше внимания.</p>
+				</article>
+			</div>
+		</section>
+		<section class="section" id="how">
+			<div class="wrap how-grid">
+				<div class="how-copy reveal">
+					<div class="eyebrow">ТРИ ШАГА ДО МАТЧА</div>
+					<h2>Никакой магии.<br><span class="gradient">Только контроль.</span></h2>
+					<p>Не нужно быть сетевым инженером, чтобы начать. Интерфейс помогает пройти путь от запуска до проверки состояния.</p>
+					<button class="primary" data-scroll="#download">Начать знакомство ↗</button>
+				</div>
+				<div class="steps">
+					<div class="step reveal">
+						<div class="num">01</div>
+						<div>
+							<h3>Открой BrawlhallaFIX</h3>
+							<p>Запусти приложение и посмотри на текущее состояние.</p>
+						</div>
+					</div>
+					<div class="step reveal">
+						<div class="num">02</div>
+						<div>
+							<h3>Выбери режим</h3>
+							<p>Подбери доступные настройки под свою ситуацию и привычный способ игры.</p>
+						</div>
+					</div>
+					<div class="step reveal">
+						<div class="num">03</div>
+						<div>
+							<h3>Проверь и играй</h3>
+							<p>Запусти выбранный режим и оцени результат в своей сети и регионе.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="wrap section" id="latency">
+			<div class="section-head reveal">
+				<div class="eyebrow">ИНТЕРАКТИВНАЯ ДЕМО</div>
+				<h2>Задержка — это ощущение.</h2>
+				<p>Поиграй с условными значениями и посмотри, как меняется шкала. Это иллюстрация, а не измерение твоей сети.</p>
+			</div>
+			<div class="demo">
+				<div class="demo-panel reveal">
+					<h3>Симулятор пинга</h3>
+					<p>Выбери условную задержку и сравни, как она воспринимается в динамичном матче.</p>
+					<div class="range-wrap">
+						<div class="range-label">
+							<label for="pingRange">Условная задержка</label><strong><span id="pingValue">42</span> мс</strong></div>
+						<input id="pingRange" type="range" min="10" max="180" value="42" step="1">
+						<div class="meter">
+							<div class="meter-fill" id="meterFill"></div>
+						</div>
+					</div>
+					<div class="demo-result" id="pingMood">Плавно <span>— условная оценка</span></div>
+					<p class="disclaimer">Показатель демонстрационный. BrawlhallaFIX не гарантирует конкретный пинг или его снижение.</p>
+				</div>
+				<div class="demo-panel reveal">
+					<h3>Что влияет на результат?</h3>
+					<p>Даже удачные настройки не отменяют физику расстояния и состояние сети. Вот что важно учитывать.</p>
+					<div class="step">
+						<div class="num">⌖</div>
+						<div>
+							<h3>Регион сервера</h3>
+							<p>Чем дальше сервер, тем больше времени обычно требуется данным на путь туда и обратно.</p>
+						</div>
+					</div>
+					<div class="step" style="margin-top:10px">
+						<div class="num">⌁</div>
+						<div>
+							<h3>Качество сети</h3>
+							<p>Потери пакетов, перегрузка Wi‑Fi и скачки маршрута влияют на стабильность матча.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="wrap section" id="faq">
+			<div class="section-head reveal">
+				<div class="eyebrow">ЕСТЬ ВОПРОСЫ?</div>
+				<h2>Коротко и по делу.</h2>
+				<p>Никаких обещаний невозможного — только понятные ответы.</p>
+			</div>
+			<div class="faq">
+				<div class="faq-item">
+					<button class="faq-q"><span>BrawlhallaFIX гарантирует снижение пинга?</span><span>＋</span></button>
+					<div class="faq-a">
+						<p>Нет. Задержка зависит от расстояния до сервера, провайдера, загруженности сети и других факторов. Приложение помогает управлять настройками подключения, но результат нужно проверять в конкретных условиях.</p>
+					</div>
+				</div>
+				<div class="faq-item">
+					<button class="faq-q"><span>Нужно ли разбираться в сетевых настройках?</span><span>＋</span></button>
+					<div class="faq-a">
+						<p>Нет, интерфейс задуман так, чтобы основные действия были доступны без глубоких технических знаний. Просто следуй подсказкам приложения.</p>
+					</div>
+				</div>
+				<div class="faq-item">
+					<button class="faq-q"><span>Это официальный продукт Brawlhalla?</span><span>＋</span></button>
+					<div class="faq-a">
+						<p>Нет. BrawlhallaFIX — независимый проект и не связан с разработчиками или издателями Brawlhalla.</p>
+					</div>
+				</div>
+				<div class="faq-item">
+					<button class="faq-q"><span>Что делать, если соединение не стало лучше?</span><span>＋</span></button>
+					<div class="faq-a">
+						<p>Попробуй другой доступный режим, проверь выбранный регион игры и качество локальной сети. Иногда причина находится вне возможностей приложения.</p>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="wrap section" id="download">
+			<div class="final-cta reveal">
+				<div class="eyebrow"><span class="dot"></span> ВРЕМЯ ВЕРНУТЬСЯ НА АРЕНУ</div>
+				<h2>Верните мой <span class="gradient">2022.</span></h2>
+				<p>Меньше возни перед матчем. Больше внимания игре. Сделай следующий запуск проще.</p>
+				<button class="primary" id="downloadBtn">Скачать BrawlhallaFIX ↗</button>
+				<p class="disclaimer" style="margin-top:14px;margin-bottom:0">Кнопку можно связать с актуальной ссылкой на загрузку перед публикацией сайта.</p>
+			</div>
+		</section>
+	</main>
+	<footer class="footer">
+		<div class="wrap footer-inner">
+			<div><strong>BrawlhallaFIX</strong> · Верните мой 2022.</div>
+			<div>Независимый проект. Не аффилирован с Brawlhalla.</div><a href="#top">Наверх ↑</a></div>
+	</footer>
+	<div class="toast" id="toast" role="status" aria-live="polite"></div>
+	<script>
+	const toastEl = document.getElementById('toast');
+	let toastTimer;
+
+	function toast(message) {
+		toastEl.textContent = message;
+		toastEl.classList.add('show');
+		clearTimeout(toastTimer);
+		toastTimer = setTimeout(() => toastEl.classList.remove('show'), 3000)
+	}
+	document.querySelectorAll('[data-toast]').forEach(b => b.addEventListener('click', () => toast(b.dataset.toast)));
+	document.querySelectorAll('[data-scroll]').forEach(b => b.addEventListener('click', () => document.querySelector(b.dataset.scroll) ? .scrollIntoView({
+		behavior: 'smooth'
+	})));
+	const menuBtn = document.getElementById('menuBtn'),
+		navLinks = document.getElementById('navLinks');
+	menuBtn.addEventListener('click', () => {
+		navLinks.classList.toggle('open');
+		menuBtn.textContent = navLinks.classList.contains('open') ? '×' : '☰'
+	});
+	navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+		navLinks.classList.remove('open');
+		menuBtn.textContent = '☰'
+	}));
+	document.querySelectorAll('.faq-q').forEach(q => q.addEventListener('click', () => {
+		const item = q.closest('.faq-item');
+		const wasOpen = item.classList.contains('open');
+		document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+		if(!wasOpen) item.classList.add('open')
+	}));
+	const range = document.getElementById('pingRange'),
+		pingValue = document.getElementById('pingValue'),
+		meterFill = document.getElementById('meterFill'),
+		pingMood = document.getElementById('pingMood');
+
+	function updatePing() {
+		const v = +range.value;
+		pingValue.textContent = v;
+		meterFill.style.width = (v / 180 * 100) + '%';
+		let label = v < 35 ? 'Очень отзывчиво' : v < 65 ? 'Плавно' : v < 100 ? 'Ощутимая задержка' : 'Высокая задержка';
+		pingMood.innerHTML = label + ' <span>— условная оценка</span>'
+	}
+	range.addEventListener('input', updatePing);
+	updatePing();
+	document.getElementById('checkConnection').addEventListener('click', () => {
+		const s = document.getElementById('connectionStatus'),
+			m = document.getElementById('miniStatus'),
+			msg = document.getElementById('appMessage');
+		s.textContent = 'Демонстрация проверки';
+		m.textContent = 'Демо';
+		msg.classList.add('show');
+		toast('Это визуальная демонстрация — реальная сеть не проверялась.');
+	});
+	document.getElementById('downloadBtn').addEventListener('click', () => toast('Добавьте сюда прямую ссылку на актуальный установщик BrawlhallaFIX.'));
+	const observer = new IntersectionObserver(entries => entries.forEach(e => {
+		if(e.isIntersecting) {
+			e.target.classList.add('visible');
+			observer.unobserve(e.target)
+		}
+	}), {
+		threshold: .12
+	});
+	document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+	document.querySelectorAll('.feature').forEach(card => card.addEventListener('pointermove', e => {
+		const r = card.getBoundingClientRect();
+		card.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+		card.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%')
+	}));
+	</script>
 </body>
+
 </html>
